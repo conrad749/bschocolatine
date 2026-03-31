@@ -9,5 +9,5 @@
 
 int main()
 {
-    printf("papa");
+    printf("maman");
 }
