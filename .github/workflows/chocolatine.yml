@@ -1,0 +1,30 @@
+name: Chocolatine
+
+on:
+  push:
+    branches-ignore:
+      - 'no-ga/**'
+  pull_request:
+    branches-ignore:
+      - 'no-ga/**'
+
+env:
+  MIRROR_SSH_URL: git@github.com:EpitechPGE1-2025/G-DOP-200-COT-2-1-chocolatine-18.git
+  EXECUTABLES: exec
+
+jobs:
+  check_compilation_and_coding_style:
+    name: Compilation and coding_style
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker
+    steps:
+      - name: Check repo
+        uses: actions/checkout@v4
+      - name: Run banana-check-repo
+        run: banana-check-repo
+      - name: compile
+        timeout-minutes: 2
+        env:
+          CC: epiclang
+        run: make
