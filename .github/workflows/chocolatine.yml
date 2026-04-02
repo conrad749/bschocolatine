@@ -28,3 +28,19 @@ jobs:
         env:
           CC: epiclang
         run: make
+      -name: Display coding-style erro
+             run: |
+               if [ -f coding-style-reports.log ]; then
+                 while IFS=read -r line; do
+                   file=$(echo "$line" | cut -d':' -f1)
+                   lineno=$(echo "$line" | cut -d':' -f2)
+                   severity=$(echo "$line" | cut -d':' -f3)
+                   message=$(echo "$line" | cut -d':' -f4)
+                   echo "::error file-$file,line=$lineno::$severity:$message"
+                   done < coding-style-reports.log
+                 fi
+      -name: Faillure if coding-style error
+             run: |
+               if [ -f coding-style-reports.log ] && [ -s coding-style-reports.log ]; then
+                 exit 1
+               fi
