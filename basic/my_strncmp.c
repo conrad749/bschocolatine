@@ -1,20 +1,20 @@
 /*
 ** EPITECH PROJECT, 2026
-** MY_STRCMP.C
+** MY_STRNCMP.C
 ** File description:
-** my_strcmp
+** my_strncmp
 */
 
 #include "basic.h"
 
-int my_strcmp(char *s1, char *s2)
+int my_strncmp(char *s1, char *s2, int n)
 {
     int i = 0;
 
-    while (s1[i] != '\0' && s2[i] != '\0') {
+    while (s1[i] != '\0' && s2[i] != '\0' && i <= n) {
         if (s1[i] != s2[i])
             return (s1[i] - s2[i]);
         i++;
     }
-    return (s1[i] - s2[i]);
+    return 0;
 }

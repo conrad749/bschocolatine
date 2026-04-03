@@ -5,12 +5,14 @@
 ** free_array
 */
 
-#include "../include/my.h"
+#include "basic.h"
 
-void free_array(char **array)
+void free_array(void **arr)
 {
-    for (int i = 0; array[i]; i++) {
-        free(array[i]);
+    if (arr == NULL)
+        return;
+    for (int i = 0; arr[i] != NULL; i++) {
+        free(arr[i]);
     }
-    free(array);
+    free(arr);
 }

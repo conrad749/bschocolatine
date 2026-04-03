@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "basic.h"
 
 int count_lines(char *str, char c)
 {
@@ -46,7 +47,7 @@ char **alloc(char *str, int lines, int *cols)
     int i = 0;
 
     for (; i < lines; i++) {
-        array[i] = (char *)malloc(sizeof(char) * cols[i]);
+        array[i] = (char *)malloc(sizeof(char) * (cols[i]));
     }
     array[i] = NULL;
     return array;
@@ -75,5 +76,6 @@ char **my_str_to_word_array(char *str, char c)
     char **array = alloc(str, len, cols);
 
     array = fill_array(array, str, len, cols);
+    free(cols);
     return array;
 }
