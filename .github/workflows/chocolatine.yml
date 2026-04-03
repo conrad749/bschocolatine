@@ -40,7 +40,7 @@ jobs:
               done < coding-style-reports.log
           fi
       - name: Faillure if coding-style error
-          run: |
-               if [ -f coding-style-reports.log ] && [ -s coding-style-reports.log ]; then
-                 exit 1
-               fi
+        run: |
+          if [ -f coding-style-reports.log ] && [ -s coding-style-reports.log ]; then
+              exit 1
+          fi
