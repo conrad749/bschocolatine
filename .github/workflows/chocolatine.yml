@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker
-    steps:
+  steps:
       - name: Check repo
         uses: actions/checkout@v4
       - name: Run banana-check-repo
