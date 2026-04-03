@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker
-  steps:
+    steps:
       - name: Check repo
         uses: actions/checkout@v4
       - name: Run banana-check-repo
@@ -39,8 +39,8 @@ jobs:
               echo "::error file-$file,line=$lineno::$severity:$message"
               done < coding-style-reports.log
           fi
-      -name: Faillure if coding-style error
-             run: |
+      - name: Faillure if coding-style error
+          run: |
                if [ -f coding-style-reports.log ] && [ -s coding-style-reports.log ]; then
                  exit 1
                fi
