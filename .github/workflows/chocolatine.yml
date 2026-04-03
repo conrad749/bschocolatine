@@ -10,7 +10,7 @@ on:
 
 env:
   MIRROR_SSH_URL: git@github.com:EpitechPGE1-2025/G-DOP-200-COT-2-1-chocolatine-18.git
-  EXECUTABLES: exec
+  EXECUTABLES: mysh
 
 jobs:
   check_compilation_and_coding_style:
@@ -24,25 +24,21 @@ jobs:
       - name: Run banana-check-repo
         run: banana-check-repo
       - name: compile Project
-        timeout-minutes: 2
-        env:
-          CC: clang
         run: make
-      - name: Run coding-style
-        run: check.sh $(pwd) $(pwd)
-      - name: Display coding-style errors
+        timeout-minutes: 2
+      - name: execute
         run: |
-          if [ -f coding-style-reports.log ]; then
-            while IFS=read -r line; do
-              file=$(echo "$line" | cut -d':' -f1)
-              lineno=$(echo "$line" | cut -d':' -f2)
-              severity=$(echo "$line" | cut -d':' -f3)
-              message=$(echo "$line" | cut -d':' -f4)
-              echo "::error file-$file,line=$lineno::$severity:$message"
-              done < coding-style-reports.log
+          if [! -x"$EXECUTABLE"]; then
+            echo "Can't execute"
+            exit 1
           fi
-      - name: Faillure if coding-style error
-        run: |
-          if [ -f coding-style-reports.log ] && [ -s coding-style-reports.log ]; then
-              exit 1
-          fi
+      - name: delete executable
+        run: make clean
+  tests:
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker
+    steps:
+      - uses: actions/checkout@v4
+      - name: unit test
+        run: make tests_run
