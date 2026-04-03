@@ -1,6 +1,0 @@
-les differents signaux lances par le shell
->lances via kill;
->SIGINT(arret, ctrl + C);
->SIGTERM(arret propre)
->SIGKILL(arret force)
->SIGSTOP(suspension)
