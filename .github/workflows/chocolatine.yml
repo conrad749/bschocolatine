@@ -23,12 +23,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Run banana-check-repo
         run: banana-check-repo
-      - name: compile
+      - name: compile Project
         timeout-minutes: 2
         env:
           CC: clang
         run: make
-      - name: Display coding-style erro
+      - name: Run coding-style
+        run: check.sh $(pwd) $(pwd)
+      - name: Display coding-style errors
         run: |
           if [ -f coding-style-reports.log ]; then
             while IFS=read -r line; do
